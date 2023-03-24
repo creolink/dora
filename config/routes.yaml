@@ -1,0 +1,16 @@
+deployment_frequency:
+    resource:
+        methods: [GET, POST]
+        path: ../src/DeploymentFrequency/Application/Controller/
+        namespace: App\DeploymentFrequency\Api
+    type: attribute
+
+lead_time_for_changes:
+    resource:
+        methods: [GET, POST]
+        path: ../src/LeadTimeForChanges/Application/Controller/
+        namespace: App\LeadTimeForChanges\Api
+    type: attribute
+
+
+
