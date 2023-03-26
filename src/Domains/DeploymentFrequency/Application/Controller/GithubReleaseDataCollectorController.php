@@ -15,7 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GithubReleaseDataCollectorController extends AbstractController
 {
-    public function __construct(private readonly DeploymentRepositoryInterface $repository, private readonly Eventbus $eventbus
+    public function __construct(
+        private readonly DeploymentRepositoryInterface $repository,
+        private readonly Eventbus $eventbus
     ) {
     }
 
