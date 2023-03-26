@@ -24,16 +24,17 @@ class GithubReleaseDataCollectorController extends AbstractController
     #[Route('/payload', name: 'release_payload')]
     public function collectStat(Request $request): JsonResponse
     {
-        $repository = $request->request->get('repository');
-        $releaseData = $request->request->get('release');
-        $deploymentTime = DeploymentTime::fromString($releaseData->published_at);
-        $authorEmail = $releaseData->author->email;
-        $releaseName = $releaseData->name;
+        $repository = $request->get('repository');
+        $releaseData = $request->get('release');
+//        $deploymentTime = DeploymentTime::fromString($releaseData->publishedAt);
+//        $authorEmail = $releaseData->author->email;
+//        $releaseName = $releaseData->name;
+//
+//        $deployment = Deployment::create(
+//            $deploymentTime, $repository, $authorEmail, $releaseName
+//        );
 
-        $deployment = Deployment::create(
-            $deploymentTime, $repository, $authorEmail, $releaseName
-        );
-
-        return new JsonResponse($repository);
+        return new JsonResponse($releaseData);
+        //return new JsonResponse(json_decode($request->getContent()));
     }
 }
