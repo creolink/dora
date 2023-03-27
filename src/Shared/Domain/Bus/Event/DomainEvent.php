@@ -3,8 +3,9 @@
 namespace App\Shared\Domain\Bus\Event;
 
 use App\Shared\Domain\AggregateRoot;
+use Symfony\Contracts\EventDispatcher\Event;
 
-class DomainEvent
+class DomainEvent extends Event
 {
     private static int $eventId = 0;
 

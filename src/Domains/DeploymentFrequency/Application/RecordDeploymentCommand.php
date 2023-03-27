@@ -2,9 +2,10 @@
 
 namespace App\Domains\DeploymentFrequency\Application;
 
+use App\Shared\Domain\Bus\Command\Command;
 use App\Shared\Domain\Bus\Command\CommandInterface;
 
-class RecordDeploymentCommand implements CommandInterface
+class RecordDeploymentCommand extends Command implements CommandInterface
 {
     public function __construct(
         private readonly string $deploymentTime,

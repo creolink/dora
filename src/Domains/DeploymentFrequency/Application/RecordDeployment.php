@@ -4,7 +4,11 @@ namespace App\Domains\DeploymentFrequency\Application;
 
 use App\Domains\DeploymentFrequency\Domain\Deployment;
 use App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTimeValueObject;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseId;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseName;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
 use App\Shared\Domain\Bus\Event\EventbusInterface;
 
 class RecordDeployment
@@ -17,10 +21,10 @@ class RecordDeployment
 
     public function __invoke(
         DeploymentTimeValueObject $deploymentTime,
-        string $repositoryName,
-        string $author,
-        string $releaseId,
-        string $releaseName
+        RepositoryName $repositoryName,
+        Author $author,
+        ReleaseId $releaseId,
+        ReleaseName $releaseName
     ): void {
         $deployment = Deployment::create(
             $deploymentTime,
@@ -31,6 +35,7 @@ class RecordDeployment
         );
 
         $this->repository->save($deployment);
-        $this->eventbus->publish($deployment->fetchEvents());
+
+        $this->eventbus->publish(...$deployment->fetchEvents());
     }
 }

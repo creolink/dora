@@ -3,8 +3,12 @@
 namespace App\Domains\DeploymentFrequency\Domain;
 
 use App\Domains\DeploymentFrequency\Domain\Events\DeploymentExecuted;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentId;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTimeValueObject;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseId;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseName;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
 use App\Shared\Domain\AggregateRoot;
 
 final class Deployment extends AggregateRoot
@@ -12,24 +16,24 @@ final class Deployment extends AggregateRoot
     public function __construct(
         private readonly DeploymentId              $deploymentId,
         private readonly DeploymentTimeValueObject $deploymentTime,
-        private readonly string                    $repositoryName,
-        private readonly string                    $author,
-        private readonly string                    $releaseId,
-        private readonly string                    $releaseName
+        private readonly RepositoryName            $repositoryName,
+        private readonly Author                    $author,
+        private readonly ReleaseId                 $releaseId,
+        private readonly ReleaseName               $releaseName
     ) {
     }
 
     public static function create(
         DeploymentTimeValueObject $deploymentTime,
-        string                    $repository,
-        string                    $author,
-        string                    $releaseId,
-        string                    $releaseName
+        RepositoryName            $repositoryName,
+        Author                    $author,
+        ReleaseId                 $releaseId,
+        ReleaseName               $releaseName
     ): self {
         $deployment = new self(
             DeploymentId::init(),
             $deploymentTime,
-            $repository,
+            $repositoryName,
             $author,
             $releaseId,
             $releaseName
@@ -55,22 +59,22 @@ final class Deployment extends AggregateRoot
         return $this->deploymentTime;
     }
 
-    public function getRepositoryName(): string
+    public function getRepositoryName(): RepositoryName
     {
         return $this->repositoryName;
     }
 
-    public function getAuthor(): string
+    public function getAuthor(): Author
     {
         return $this->author;
     }
 
-    public function getReleaseId(): string
+    public function getReleaseId(): ReleaseId
     {
         return $this->releaseId;
     }
 
-    public function getReleaseName(): string
+    public function getReleaseName(): ReleaseName
     {
         return $this->releaseName;
     }
