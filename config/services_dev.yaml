@@ -24,4 +24,4 @@ services:
     # please note that last definitions always *replace* previous ones
 
     App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface:
-        class: App\Domains\DeploymentFrequency\Infrastructure\Persistence\Doctrine\DoctrineDeploymentRepository
+        class: App\Domains\DeploymentFrequency\Infrastructure\Persistence\InMemoryDeploymentRepository

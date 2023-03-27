@@ -4,5 +4,5 @@ namespace App\Domains\DeploymentFrequency\Domain;
 
 interface DeploymentRepositoryInterface
 {
-    public function save(): void;
+    public function save(Deployment $deployment): void;
 }
