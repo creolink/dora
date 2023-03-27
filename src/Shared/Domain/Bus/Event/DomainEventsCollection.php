@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shared\EventBus;
+namespace App\Shared\Domain\Bus\Event;
 
 use Doctrine\Common\Collections\ArrayCollection;
 

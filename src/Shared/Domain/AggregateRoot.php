@@ -2,23 +2,23 @@
 
 namespace App\Shared\Domain;
 
-use App\Shared\EventBus\DomainEvent;
-use App\Shared\EventBus\DomainEventsCollection;
+use App\Shared\Domain\Bus\Event\DomainEvent;
+use App\Shared\Domain\Bus\Event\DomainEventsCollection;
 
 class AggregateRoot
 {
     private DomainEventsCollection $events;
 
-    public function store(DomainEvent $event): void
+    public function recordEvent(DomainEvent $event): void
     {
-        if (!$this->events instanceof DomainEventsCollection) {
+        if (!isset($this->events)) {
             $this->events = new DomainEventsCollection();
         }
 
         $this->events->add($event);
     }
 
-    public function fetch(): DomainEventsCollection
+    public function fetchEvents(): DomainEventsCollection
     {
         return $this->events;
     }

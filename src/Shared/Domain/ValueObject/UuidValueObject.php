@@ -4,7 +4,7 @@ namespace App\Shared\Domain\ValueObject;
 
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
-class Uuid implements ValueObjectInterface
+class UuidValueObject implements ValueObjectInterface
 {
     private function __construct(private readonly string $uuid)
     {

@@ -2,34 +2,47 @@
 
 namespace App\Domains\DeploymentFrequency\Domain;
 
-use App\Domains\DeploymentFrequency\Domain\Events\CodeDeployed;
+use App\Domains\DeploymentFrequency\Domain\Events\DeploymentExecuted;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentId;
-use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTime;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTimeValueObject;
 use App\Shared\Domain\AggregateRoot;
 
 final class Deployment extends AggregateRoot
 {
-    public function __construct(private readonly DeploymentId $deploymentId,
-                                private readonly DeploymentTime $deploymentTime,
-                                private readonly string $repository,
-                                private readonly string $authorEmail,
-                                private readonly string $releaseName
+    public function __construct(
+        private readonly DeploymentId              $deploymentId,
+        private readonly DeploymentTimeValueObject $deploymentTime,
+        private readonly string                    $repositoryName,
+        private readonly string                    $author,
+        private readonly string                    $releaseId,
+        private readonly string                    $releaseName
     ) {
     }
 
-    public static function create(DeploymentTime $deploymentTime, string $repository, string $authorEmail, string $releaseName): self
-    {
+    public static function create(
+        DeploymentTimeValueObject $deploymentTime,
+        string                    $repository,
+        string                    $author,
+        string                    $releaseId,
+        string                    $releaseName
+    ): self {
         $deployment = new self(
             DeploymentId::init(),
             $deploymentTime,
             $repository,
-            $authorEmail,
+            $author,
+            $releaseId,
             $releaseName
         );
 
-        $deployment->store(new CodeDeployed($deployment));
+        $deployment->recordEvent(new DeploymentExecuted($deployment));
 
         return $deployment;
+    }
+
+    public function publish()
+    {
+        $this->recordEvent(new DeploymentExecuted($this));
     }
 
     public function getDeploymentId(): DeploymentId
@@ -37,19 +50,24 @@ final class Deployment extends AggregateRoot
         return $this->deploymentId;
     }
 
-    public function getDeploymentTime(): DeploymentTime
+    public function getDeploymentTime(): DeploymentTimeValueObject
     {
         return $this->deploymentTime;
     }
 
-    public function getRepository(): string
+    public function getRepositoryName(): string
     {
-        return $this->repository;
+        return $this->repositoryName;
     }
 
-    public function getAuthorEmail(): string
+    public function getAuthor(): string
     {
-        return $this->authorEmail;
+        return $this->author;
+    }
+
+    public function getReleaseId(): string
+    {
+        return $this->releaseId;
     }
 
     public function getReleaseName(): string

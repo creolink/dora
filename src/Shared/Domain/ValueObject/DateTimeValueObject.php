@@ -2,7 +2,7 @@
 
 namespace App\Shared\Domain\ValueObject;
 
-class DateTime implements ValueObjectInterface
+class DateTimeValueObject implements ValueObjectInterface
 {
     private function __construct(private readonly \DateTimeInterface $dateTime)
     {
