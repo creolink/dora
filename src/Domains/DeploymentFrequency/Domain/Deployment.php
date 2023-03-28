@@ -5,7 +5,7 @@ namespace App\Domains\DeploymentFrequency\Domain;
 use App\Domains\DeploymentFrequency\Domain\Events\DeploymentExecuted;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentId;
-use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTimeValueObject;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTime;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseId;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseName;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
@@ -14,21 +14,21 @@ use App\Shared\Domain\AggregateRoot;
 final class Deployment extends AggregateRoot
 {
     public function __construct(
-        private readonly DeploymentId              $deploymentId,
-        private readonly DeploymentTimeValueObject $deploymentTime,
-        private readonly RepositoryName            $repositoryName,
-        private readonly Author                    $author,
-        private readonly ReleaseId                 $releaseId,
-        private readonly ReleaseName               $releaseName
+        private readonly DeploymentId   $deploymentId,
+        private readonly DeploymentTime $deploymentTime,
+        private readonly RepositoryName $repositoryName,
+        private readonly Author         $author,
+        private readonly ReleaseId      $releaseId,
+        private readonly ReleaseName    $releaseName
     ) {
     }
 
     public static function create(
-        DeploymentTimeValueObject $deploymentTime,
-        RepositoryName            $repositoryName,
-        Author                    $author,
-        ReleaseId                 $releaseId,
-        ReleaseName               $releaseName
+        DeploymentTime $deploymentTime,
+        RepositoryName $repositoryName,
+        Author         $author,
+        ReleaseId      $releaseId,
+        ReleaseName    $releaseName
     ): self {
         $deployment = new self(
             DeploymentId::init(),
@@ -54,7 +54,7 @@ final class Deployment extends AggregateRoot
         return $this->deploymentId;
     }
 
-    public function getDeploymentTime(): DeploymentTimeValueObject
+    public function getDeploymentTime(): DeploymentTime
     {
         return $this->deploymentTime;
     }

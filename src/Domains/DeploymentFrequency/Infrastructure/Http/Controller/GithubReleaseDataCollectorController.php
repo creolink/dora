@@ -20,7 +20,7 @@ class GithubReleaseDataCollectorController extends AbstractController
     ) {
     }
 
-    #[Route('/payload', name: 'release_payload')]
+    #[Route('/payload', name: 'release_payload', methods: 'POST')]
     public function collectStat(Request $request): Response
     {
         $releaseData = $request->get('release');

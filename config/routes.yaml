@@ -1,6 +1,6 @@
 deployment_frequency:
     resource:
-        methods: [POST]
+        methods: [GET,POST]
         path: ../src/Domains/DeploymentFrequency/Infrastructure/Http/Controller/
         namespace: App\Domains\DeploymentFrequency\Infrastructure\Http\Controller
     type: attribute

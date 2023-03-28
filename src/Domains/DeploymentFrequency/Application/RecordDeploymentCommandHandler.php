@@ -3,7 +3,7 @@
 namespace App\Domains\DeploymentFrequency\Application;
 
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
-use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTimeValueObject;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTime;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseId;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseName;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
@@ -27,7 +27,7 @@ class RecordDeploymentCommandHandler implements CommandHandlerInterface, EventSu
     public function __invoke(RecordDeploymentCommand $command)
     {
         $this->metricSaver->__invoke(
-            DeploymentTimeValueObject::fromString($command->getDeploymentTime()),
+            DeploymentTime::fromString($command->getDeploymentTime()),
             RepositoryName::toString($command->getRepositoryName()),
             Author::toString($command->getAuthor()),
             ReleaseId::toString($command->getReleaseId()),
