@@ -4,7 +4,6 @@ namespace App\Domains\DeploymentFrequency\Infrastructure\Persistence\InternalMem
 
 class InternalMemoryDataStorage
 {
-    protected static array $deployments = [];
     protected static MemoryStorageCollection $memory;
 
     public function __construct()
