@@ -4,11 +4,11 @@ namespace App\Shared\Domain\ValueObject;
 
 class IntValueObject implements ValueObjectInterface
 {
-    private function __construct(private readonly mixed $value)
+    private function __construct(private readonly int $value)
     {
     }
 
-    public static function toInt($value): static
+    public static function toInt(mixed $value): static
     {
         return new static((int) $value);
     }

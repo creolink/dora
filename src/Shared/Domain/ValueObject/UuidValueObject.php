@@ -16,7 +16,7 @@ class UuidValueObject implements ValueObjectInterface
         return new static(RamseyUuid::uuid4()->toString());
     }
 
-    public function get(): string
+    public function value(): string
     {
         return $this->uuid;
     }

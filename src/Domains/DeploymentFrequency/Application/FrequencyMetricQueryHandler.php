@@ -4,7 +4,6 @@ namespace App\Domains\DeploymentFrequency\Application;
 
 use App\Domains\DeploymentFrequency\Domain\FrequencyMetric;
 use App\Domains\DeploymentFrequency\Domain\FrequencyMetricRepositoryInterface;
-use App\Domains\DeploymentFrequency\Domain\ValueObjects\Score;
 use App\Shared\Domain\Bus\Query\QueryHandlerInterface;
 
 class FrequencyMetricQueryHandler implements QueryHandlerInterface
@@ -22,13 +21,11 @@ class FrequencyMetricQueryHandler implements QueryHandlerInterface
             $query->getAuthor()
         );
 
-
-
         return new FrequencyMetric(
             $query->getRepositoryName(),
             $query->getTimeRangeInDays(),
-            Score::toFloat(232),
-            $query->getAuthor()
+            $query->getAuthor(),
+            $deployments
         );
     }
 }

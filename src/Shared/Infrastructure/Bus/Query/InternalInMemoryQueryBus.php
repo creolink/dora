@@ -7,7 +7,7 @@ use App\Shared\Domain\Bus\Query\QueryHandlerInterface;
 use App\Shared\Domain\Bus\Query\QueryInterface;
 use App\Shared\Domain\Bus\Query\ResponseInterface;
 
-class InMemoryQueryBus implements QueryBusInterface
+class InternalInMemoryQueryBus implements QueryBusInterface
 {
     private static array $queries = [];
     private static array $results = [];
@@ -23,6 +23,9 @@ class InMemoryQueryBus implements QueryBusInterface
     {
         self::$queries[$query->getUuid()->toString()] = $query;
 
+        $lastErrorMessage = '';
+        $lastErrorTrace = '';
+
         foreach ($this->queryHandlers as $queryHandler) {
             try {
                 $result = $queryHandler->__invoke($query);
@@ -30,10 +33,14 @@ class InMemoryQueryBus implements QueryBusInterface
                 self::$results[$query->getUuid()->toString()] = $result;
 
                 return $result;
-            } catch (\Exception) {
+            } catch (\Exception $e) {
+                $lastErrorMessage = $e->getMessage();
+                $lastErrorTrace = $e->getTraceAsString();
             }
         }
 
-        throw new \Exception(sprintf("Missing Query Handler for %s", $query::class));
+        throw new \Exception(
+            sprintf("Missing Query Handler for %s. Error with message %s, %s", $query::class, $lastErrorMessage, $lastErrorTrace)
+        );
     }
 }

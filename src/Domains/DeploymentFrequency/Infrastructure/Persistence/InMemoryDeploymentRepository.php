@@ -4,14 +4,14 @@ namespace App\Domains\DeploymentFrequency\Infrastructure\Persistence;
 
 use App\Domains\DeploymentFrequency\Domain\Deployment;
 use App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface;
+use App\Domains\DeploymentFrequency\Infrastructure\Persistence\InternalMemory\InternalMemoryDataStorage;
+use App\Domains\DeploymentFrequency\Infrastructure\Persistence\InternalMemory\MemoryStorageCollection;
 
-class InMemoryDeploymentRepository implements DeploymentRepositoryInterface
+class InMemoryDeploymentRepository extends InternalMemoryDataStorage implements DeploymentRepositoryInterface
 {
-    private static array $deployments = [];
-
     public function save(Deployment $deployment): void
     {
-        self::$deployments[$deployment->getDeploymentId()->get()] = $deployment;
+        self::$memory->add($deployment);
 
         dump('SAVED IN MEMORY');
     }

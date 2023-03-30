@@ -15,8 +15,6 @@ class FrequencyMetricProvider
 
     public function __invoke(QueryInterface $frequencyMetricQuery): FrequencyMetric
     {
-        $response = $this->queryBus->ask($frequencyMetricQuery);
-
-        return $response;
+        return $this->queryBus->ask($frequencyMetricQuery);
     }
 }

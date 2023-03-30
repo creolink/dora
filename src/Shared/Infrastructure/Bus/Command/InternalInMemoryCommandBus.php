@@ -7,7 +7,7 @@ use App\Shared\Domain\Bus\Command\CommandInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class InMemoryCommandBus implements CommandBusInterface
+class InternalInMemoryCommandBus implements CommandBusInterface
 {
     public function __construct(private EventDispatcherInterface $eventDispatcher)
     {

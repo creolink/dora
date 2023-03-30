@@ -4,11 +4,11 @@ namespace App\Shared\Domain\ValueObject;
 
 class StringValueObject implements ValueObjectInterface
 {
-    private function __construct(private readonly mixed $value)
+    private function __construct(private readonly string $value)
     {
     }
 
-    public static function toString($value): static
+    public static function toString(mixed $value): static
     {
         return new static((string) $value);
     }

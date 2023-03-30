@@ -1,5 +1,5 @@
-#parameters:
-#
-#services:
-#    App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface:
-#        class: App\Domains\DeploymentFrequency\Infrastructure\Persistence\InMemoryDeploymentRepository
+parameters:
+
+services:
+    App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface:
+        class: App\Domains\DeploymentFrequency\Infrastructure\Persistence\InMemoryDeploymentRepository

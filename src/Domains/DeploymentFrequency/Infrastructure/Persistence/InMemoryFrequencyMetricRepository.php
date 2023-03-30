@@ -6,17 +6,19 @@ use App\Domains\DeploymentFrequency\Domain\FrequencyMetricRepositoryInterface;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\TimeRangeInDays;
+use App\Domains\DeploymentFrequency\Infrastructure\Persistence\InternalMemory\InternalMemoryDataStorage;
 
-class InMemoryFrequencyMetricRepository implements FrequencyMetricRepositoryInterface
+class InMemoryFrequencyMetricRepository extends InternalMemoryDataStorage implements FrequencyMetricRepositoryInterface
 {
-    private static array $memory = [];
-
     public function getDeployments(
         RepositoryName  $repositoryName,
         TimeRangeInDays $timeRange,
         ?Author         $author
-    ): array {
+    ): ?array {
 
-        return self::$memory[$repositoryName->value()][$timeRange->value()];
+        return null;
+
+
+        return self::$deployments[$repositoryName->value()][$timeRange->value()];
     }
 }

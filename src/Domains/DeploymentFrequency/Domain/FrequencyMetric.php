@@ -14,9 +14,12 @@ class FrequencyMetric extends AggregateRoot implements ResponseInterface
     public function __construct(
         private readonly RepositoryName  $repositoryName,
         private readonly TimeRangeInDays $timeRange,
-        private readonly Score           $score,
-        private readonly ?Author         $author
+        private readonly ?Author         $author,
+        private readonly ?array           $deployments
     ) {
+        if ($timeRange->value() <= 0) {
+            throw new \Exception("Time range must be provided in days. It must be a positive value.");
+        }
     }
 
     public function getRepositoryName(): RepositoryName
@@ -29,9 +32,14 @@ class FrequencyMetric extends AggregateRoot implements ResponseInterface
         return $this->timeRange;
     }
 
-    public function getScore(): Score
+    public function getDeployments(): array
     {
-        return $this->score;
+        return $this->deployments;
+    }
+
+    public function calculateScore(): Score
+    {
+        return Score::toFloat(count($this->deployments) / $this->timeRange->value());
     }
 
     public function getAuthor(): ?Author

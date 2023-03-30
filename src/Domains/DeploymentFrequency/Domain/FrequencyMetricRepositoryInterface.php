@@ -12,5 +12,5 @@ interface FrequencyMetricRepositoryInterface
         RepositoryName  $repositoryName,
         TimeRangeInDays $timeRange,
         ?Author         $author
-    ): array;
+    ): ?array;
 }
