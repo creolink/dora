@@ -2,6 +2,7 @@
 
 namespace App\Domains\DeploymentFrequency\Infrastructure\Persistence;
 
+use App\Domains\DeploymentFrequency\Domain\Deployment;
 use App\Domains\DeploymentFrequency\Domain\FrequencyMetricRepositoryInterface;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
@@ -15,10 +16,19 @@ class InMemoryFrequencyMetricRepository extends InternalMemoryDataStorage implem
         TimeRangeInDays $timeRange,
         ?Author         $author
     ): ?array {
+        $startDateTime = (new \DateTimeImmutable())
+            ->sub(
+                new \DateInterval(sprintf('P%sD', $timeRange->value()))
+            )
+        ;
 
-        return null;
-
-
-        return self::$deployments[$repositoryName->value()][$timeRange->value()];
+        return self::$memory->filter(
+            function (Deployment $deployment) use ($repositoryName, $startDateTime, $author) {
+                return $deployment->getRepositoryName() === $repositoryName
+                    && (null===$author || $deployment->getAuthor() === $author)
+                    && $deployment->getDeploymentTime()->getTimestamp() >= $startDateTime
+                ;
+            }
+        )->toArray();
     }
 }
