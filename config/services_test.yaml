@@ -1,5 +1,13 @@
-#parameters:
-#
-#services:
-#    App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface:
-#        class: App\Domains\DeploymentFrequency\Infrastructure\Persistence\InMemoryDeploymentRepository
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Tests\Behat\:
+        resource: '../tests/Behat/*'
+
+    App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface:
+        class: App\Domains\DeploymentFrequency\Infrastructure\Persistence\InMemoryDeploymentRepository
+
