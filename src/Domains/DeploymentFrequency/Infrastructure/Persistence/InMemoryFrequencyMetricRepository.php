@@ -12,9 +12,9 @@ use App\Domains\DeploymentFrequency\Infrastructure\Persistence\InternalMemory\In
 class InMemoryFrequencyMetricRepository extends InternalMemoryDataStorage implements FrequencyMetricRepositoryInterface
 {
     public function getDeployments(
-        RepositoryName  $repositoryName,
+        RepositoryName $repositoryName,
         TimeRangeInDays $timeRange,
-        ?Author         $author
+        ?Author $author
     ): ?array {
         $startDateTime = (new \DateTimeImmutable())
             ->sub(
@@ -25,7 +25,7 @@ class InMemoryFrequencyMetricRepository extends InternalMemoryDataStorage implem
         return self::$memory->filter(
             function (Deployment $deployment) use ($repositoryName, $startDateTime, $author) {
                 return $deployment->getRepositoryName() === $repositoryName
-                    && (null===$author || $deployment->getAuthor() === $author)
+                    && (null === $author || $deployment->getAuthor() === $author)
                     && $deployment->getDeploymentTime()->getTimestamp() >= $startDateTime
                 ;
             }

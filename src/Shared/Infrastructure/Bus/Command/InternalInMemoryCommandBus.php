@@ -5,7 +5,6 @@ namespace App\Shared\Infrastructure\Bus\Command;
 use App\Shared\Domain\Bus\Command\CommandBusInterface;
 use App\Shared\Domain\Bus\Command\CommandInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Contracts\EventDispatcher\Event;
 
 class InternalInMemoryCommandBus implements CommandBusInterface
 {

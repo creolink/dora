@@ -25,6 +25,6 @@ class DateTimeValueObject implements ValueObjectInterface
 
     public function getFormatted(): string
     {
-        return $this->dateTime->format("d/m/Y H:i:s");
+        return $this->dateTime->format('d/m/Y H:i:s');
     }
 }

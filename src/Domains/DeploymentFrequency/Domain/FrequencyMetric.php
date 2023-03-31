@@ -12,13 +12,13 @@ use App\Shared\Domain\Bus\Query\ResponseInterface;
 class FrequencyMetric extends AggregateRoot implements ResponseInterface
 {
     public function __construct(
-        private readonly RepositoryName  $repositoryName,
+        private readonly RepositoryName $repositoryName,
         private readonly TimeRangeInDays $timeRange,
-        private readonly ?Author         $author,
-        private readonly ?array           $deployments
+        private readonly ?Author $author,
+        private readonly ?array $deployments
     ) {
         if ($timeRange->value() <= 0) {
-            throw new \Exception("Time range must be provided in days. It must be a positive value.");
+            throw new \Exception('Time range must be provided in days. It must be a positive value.');
         }
     }
 

@@ -6,5 +6,4 @@ use App\Shared\Domain\ValueObject\FloatValueObject;
 
 class Score extends FloatValueObject
 {
-
 }

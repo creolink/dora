@@ -22,9 +22,9 @@ class RecordDeployment
     public function __invoke(
         DeploymentTime $deploymentTime,
         RepositoryName $repositoryName,
-        Author         $author,
-        ReleaseId      $releaseId,
-        ReleaseName    $releaseName
+        Author $author,
+        ReleaseId $releaseId,
+        ReleaseName $releaseName
     ): void {
         $deployment = Deployment::create(
             $deploymentTime,

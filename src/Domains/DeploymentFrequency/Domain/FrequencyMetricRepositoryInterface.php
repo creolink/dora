@@ -9,8 +9,8 @@ use App\Domains\DeploymentFrequency\Domain\ValueObjects\TimeRangeInDays;
 interface FrequencyMetricRepositoryInterface
 {
     public function getDeployments(
-        RepositoryName  $repositoryName,
+        RepositoryName $repositoryName,
         TimeRangeInDays $timeRange,
-        ?Author         $author
+        ?Author $author
     ): ?array;
 }

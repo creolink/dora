@@ -3,7 +3,6 @@
 namespace App;
 
 use App\DependencyInjection\Compiler\TaggedIteratorToSeparateArgumentsPass;
-use App\Shared\Domain\Bus\Query\QueryHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

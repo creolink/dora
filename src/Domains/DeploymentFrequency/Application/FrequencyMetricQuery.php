@@ -15,7 +15,7 @@ class FrequencyMetricQuery implements QueryInterface
         private readonly RepositoryName $repositoryName,
         private readonly TimeRangeInDays $timeRangeInDays,
         private readonly ?Author $author
-    ){
+    ) {
     }
 
     public function getUuid(): UuidInterface

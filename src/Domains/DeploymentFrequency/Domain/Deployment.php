@@ -14,21 +14,21 @@ use App\Shared\Domain\AggregateRoot;
 final class Deployment extends AggregateRoot
 {
     public function __construct(
-        private readonly DeploymentId   $deploymentId,
+        private readonly DeploymentId $deploymentId,
         private readonly DeploymentTime $deploymentTime,
         private readonly RepositoryName $repositoryName,
-        private readonly Author         $author,
-        private readonly ReleaseId      $releaseId,
-        private readonly ReleaseName    $releaseName
+        private readonly Author $author,
+        private readonly ReleaseId $releaseId,
+        private readonly ReleaseName $releaseName
     ) {
     }
 
     public static function create(
         DeploymentTime $deploymentTime,
         RepositoryName $repositoryName,
-        Author         $author,
-        ReleaseId      $releaseId,
-        ReleaseName    $releaseName
+        Author $author,
+        ReleaseId $releaseId,
+        ReleaseName $releaseName
     ): self {
         $deployment = new self(
             DeploymentId::init(),

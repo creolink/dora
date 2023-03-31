@@ -4,7 +4,6 @@ namespace App\Domains\DeploymentFrequency\Infrastructure\Http\Controller;
 
 use App\Domains\DeploymentFrequency\Application\FrequencyMetricProvider;
 use App\Domains\DeploymentFrequency\Application\FrequencyMetricQuery;
-use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\TimeRangeInDays;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +15,6 @@ class FrequencyMetricProviderController extends AbstractController
 {
     public function __construct(private readonly FrequencyMetricProvider $frequencyMetric)
     {
-
     }
 
     #[Route('/metric/{repositoryName}', name: 'frequency_metric', methods: 'GET')]

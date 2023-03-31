@@ -39,8 +39,6 @@ class InternalInMemoryQueryBus implements QueryBusInterface
             }
         }
 
-        throw new \Exception(
-            sprintf("Missing Query Handler for %s. Error with message %s, %s", $query::class, $lastErrorMessage, $lastErrorTrace)
-        );
+        throw new \Exception(sprintf('Missing Query Handler for %s. Error with message %s, %s', $query::class, $lastErrorMessage, $lastErrorTrace));
     }
 }

@@ -16,7 +16,7 @@ class GithubReleaseDataCollectorController extends AbstractController
 {
     public function __construct(
         private readonly RecordDeploymentCommandHandler $commandHandler,
-        private readonly CommandBusInterface            $commandBus
+        private readonly CommandBusInterface $commandBus
     ) {
     }
 

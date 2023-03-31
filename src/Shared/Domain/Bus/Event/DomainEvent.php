@@ -11,6 +11,6 @@ class DomainEvent extends Event
 
     public function __construct(private readonly AggregateRoot $eventPayload)
     {
-        self::$eventId++;
+        ++self::$eventId;
     }
 }
