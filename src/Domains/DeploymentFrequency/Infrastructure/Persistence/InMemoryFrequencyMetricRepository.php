@@ -22,20 +22,13 @@ class InMemoryFrequencyMetricRepository extends InternalMemoryDataStorage implem
             )
         ;
 
-        //dump($startDateTime->getTimestamp());
-
-        $list = static::$memory->filter(
+        return static::$memory->filter(
             function (Deployment $deployment) use ($repositoryName, $startDateTime, $author) {
-                //var_dump($repositoryName, $deployment->getRepositoryName());
-                return $deployment->getRepositoryName() == $repositoryName
-                    && (null === $author || $deployment->getAuthor() === $author)
+                return $deployment->getRepositoryName()->value() == $repositoryName->value()
+                    && (null === $author || $deployment->getAuthor()->value() === $author->value())
                     && $deployment->getDeploymentTime()->getTimestamp() >= $startDateTime->getTimestamp()
                 ;
             }
         )->toArray();
-
-        //var_dump('--- READ FROM MEMORY ---', $list);
-
-        return $list;
     }
 }

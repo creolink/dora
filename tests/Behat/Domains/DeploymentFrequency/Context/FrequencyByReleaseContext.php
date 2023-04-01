@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Behat\Domains\DeploymentFrequency\Context;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,7 +65,7 @@ final class FrequencyByReleaseContext implements Context
      * @When I request :path using HTTP :method
      * @When I send a :method request to :path
      */
-    public function iRequestUsingHttpPost($path, $method)
+    public function iRequestUsingHttpPost(string $path, string $method)
     {
         $this->response = $this->kernel->handle(
             Request::create($path, $method)
@@ -76,7 +75,7 @@ final class FrequencyByReleaseContext implements Context
     /**
      * @Then the response code is :code
      */
-    public function theResponseCodeIs($code)
+    public function theResponseCodeIs(int $code)
     {
         Assert::assertEquals($code, $this->response->getStatusCode());
     }
@@ -84,9 +83,11 @@ final class FrequencyByReleaseContext implements Context
     /**
      *  @Then the response is equal to:
      */
-    public function theResponseIs($payload)
+    public function theResponseIsEqualTo(PyStringNode $payload)
     {
-        dump($this->response->getContent());
-        //Assert::assertEquals($payload, $this->response->getContent());
+        Assert::assertEquals(
+            json_decode($payload->getRaw()),
+            json_decode($this->response->getContent())
+        );
     }
 }
