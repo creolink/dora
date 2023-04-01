@@ -4,28 +4,25 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat\Domains\DeploymentFrequency\Context;
 
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTime;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseId;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseName;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\KernelInterface;
+use App\Domains\DeploymentFrequency\Domain\Deployment;
 
-final class FrequencyByReleaseContext implements Context
+final class FrequencyByReleaseContext extends AbstractContext implements Context
 {
-    /** @var KernelInterface */
-    private $kernel;
-
-    /** @var Response|null */
-    private $response;
+    private ?Response $response;
 
     private string $requestPayload;
     private array $requestHeaders;
-
-    public function __construct(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
-    }
 
     /**
      * @Given the :arg1 request header contains :arg2
@@ -89,5 +86,26 @@ final class FrequencyByReleaseContext implements Context
             json_decode($payload->getRaw()),
             json_decode($this->response->getContent())
         );
+    }
+
+    /**
+     * @Given There are stored Deployments with data:
+     */
+    public function thereAreStoredDeploymentsWithData(TableNode $table)
+    {
+        $rows = $table->getIterator();
+        //$headers = array_shift($rows);
+
+        foreach ($rows as $index => $row) {
+            $deployment = Deployment::create(
+                DeploymentTime::fromString($row['DeploymentTime']),
+                RepositoryName::toString($row['RepositoryName']),
+                Author::toString($row['Author']),
+                ReleaseId::toString($row['ReleaseId']),
+                ReleaseName::toString($row['ReleaseName'])
+            );
+
+            $this->deploymentRepository->save($deployment);
+        }
     }
 }

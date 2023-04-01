@@ -9,7 +9,12 @@ class InternalMemoryDataStorage
     public function __construct()
     {
         if (!isset(static::$memory)) {
-            static::$memory = new MemoryStorageCollection();
+            $this->initData();
         }
+    }
+
+    public function initData(): void
+    {
+        static::$memory = new MemoryStorageCollection();
     }
 }
