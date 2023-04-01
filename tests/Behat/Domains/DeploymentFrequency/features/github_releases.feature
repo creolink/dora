@@ -1,11 +1,8 @@
-# This file contains a user story for demonstration only.
-# Learn how to get started with Behat and BDD on Behat's website:
-# http://behat.org/en/latest/quick_start.html
 
 Feature:
     It tests the deploment frequency metric collected from github releases
 
-    Scenario: Collect several releases and calculate the frequency for a repository
+    Scenario: End-to-End test from collection up to metric calculation
         Given the "Content-Type" request header contains "application/json"
         And the request body is:
         """
