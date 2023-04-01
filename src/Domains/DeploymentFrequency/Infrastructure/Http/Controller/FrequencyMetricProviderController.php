@@ -31,6 +31,6 @@ class FrequencyMetricProviderController extends AbstractController
             )
         );
 
-        return $this->json($metric);
+        return new JsonResponse($metric->toResponse());
     }
 }

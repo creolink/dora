@@ -8,6 +8,16 @@ class DateTimeValueObject implements ValueObjectInterface
     {
     }
 
+    public static function subDays(int $days): static
+    {
+        return new static(
+            (new \DateTimeImmutable())
+                ->sub(
+                    new \DateInterval(sprintf('P%sD', $days))
+                )
+        );
+    }
+
     public static function now(): static
     {
         return new static(new \DateTimeImmutable());
@@ -23,8 +33,13 @@ class DateTimeValueObject implements ValueObjectInterface
         return $this->dateTime->getTimestamp();
     }
 
-    public function getFormatted(): string
+    public function getFormattedDateTime(): string
     {
         return $this->dateTime->format('d/m/Y H:i:s');
+    }
+
+    public function getFormattedDate(): string
+    {
+        return $this->dateTime->format('d/m/Y');
     }
 }

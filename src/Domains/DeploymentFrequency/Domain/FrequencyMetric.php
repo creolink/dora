@@ -8,6 +8,7 @@ use App\Domains\DeploymentFrequency\Domain\ValueObjects\Score;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\TimeRangeInDays;
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\Bus\Query\ResponseInterface;
+use App\Shared\Domain\ValueObject\DateTimeValueObject;
 
 class FrequencyMetric extends AggregateRoot implements ResponseInterface
 {
@@ -37,13 +38,34 @@ class FrequencyMetric extends AggregateRoot implements ResponseInterface
         return $this->deployments;
     }
 
-    public function calculateScore(): Score
-    {
-        return Score::toFloat(count($this->deployments) / $this->timeRange->value());
-    }
-
     public function getAuthor(): ?Author
     {
         return $this->author;
+    }
+
+    public function getStartDate(): DateTimeValueObject
+    {
+        return DateTimeValueObject::subDays($this->timeRange->value());
+    }
+
+    public function getEndDate(): DateTimeValueObject
+    {
+        return DateTimeValueObject::now();
+    }
+
+    public function calculateScore(): Score
+    {
+        return Score::calculate(count($this->deployments), $this->timeRange->value());
+    }
+
+    public function toResponse(): array
+    {
+        return [
+            'repository' => $this->getRepositoryName()->value(),
+            'from' => $this->getStartDate()->getFormattedDate(),
+            'to' => $this->getEndDate()->getFormattedDate(),
+            'duration_in_days' => $this->getTimeRange()->value(),
+            'score' => $this->calculateScore()->roundedValue(2),
+        ];
     }
 }

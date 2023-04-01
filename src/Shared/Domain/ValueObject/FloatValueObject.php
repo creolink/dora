@@ -17,4 +17,9 @@ class FloatValueObject implements ValueObjectInterface
     {
         return $this->value;
     }
+
+    public function roundedValue($precision): float
+    {
+        return round($this->value, $precision);
+    }
 }

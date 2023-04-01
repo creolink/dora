@@ -10,8 +10,8 @@ class InMemoryDeploymentRepository extends InternalMemoryDataStorage implements 
 {
     public function save(Deployment $deployment): void
     {
-        self::$memory->add($deployment);
+        static::$memory->add($deployment);
 
-        dump('SAVED IN MEMORY');
+        //dump('--- SAVED IN MEMORY ---', static::$memory);
     }
 }

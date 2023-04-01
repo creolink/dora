@@ -2,7 +2,7 @@
 
 namespace App\Domains\DeploymentFrequency\Domain;
 
-use App\Domains\DeploymentFrequency\Domain\Events\DeploymentExecuted;
+use App\Domains\DeploymentFrequency\Domain\Events\DeploymentAcknowledged;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentId;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTime;
@@ -39,14 +39,14 @@ final class Deployment extends AggregateRoot
             $releaseName
         );
 
-        $deployment->recordEvent(new DeploymentExecuted($deployment));
+        $deployment->recordEvent(new DeploymentAcknowledged($deployment));
 
         return $deployment;
     }
 
     public function publish()
     {
-        $this->recordEvent(new DeploymentExecuted($this));
+        $this->recordEvent(new DeploymentAcknowledged($this));
     }
 
     public function getDeploymentId(): DeploymentId

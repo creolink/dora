@@ -8,6 +8,8 @@ class InternalMemoryDataStorage
 
     public function __construct()
     {
-        self::$memory = new MemoryStorageCollection();
+        if (!isset(static::$memory)) {
+            static::$memory = new MemoryStorageCollection();
+        }
     }
 }
