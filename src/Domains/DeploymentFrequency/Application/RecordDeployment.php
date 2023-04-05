@@ -5,7 +5,7 @@ namespace App\Domains\DeploymentFrequency\Application;
 use App\Domains\DeploymentFrequency\Domain\Deployment;
 use App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
-use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTime;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentDateTime;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseId;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseName;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
@@ -20,11 +20,11 @@ class RecordDeployment
     }
 
     public function __invoke(
-        DeploymentTime $deploymentTime,
-        RepositoryName $repositoryName,
-        Author $author,
-        ReleaseId $releaseId,
-        ReleaseName $releaseName
+        DeploymentDateTime $deploymentTime,
+        RepositoryName     $repositoryName,
+        Author             $author,
+        ReleaseId          $releaseId,
+        ReleaseName        $releaseName
     ): void {
         $deployment = Deployment::create(
             $deploymentTime,

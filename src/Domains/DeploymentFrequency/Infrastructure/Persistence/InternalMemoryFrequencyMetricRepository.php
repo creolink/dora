@@ -9,7 +9,8 @@ use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\TimeRangeInDays;
 use App\Domains\DeploymentFrequency\Infrastructure\Persistence\InternalMemory\InternalMemoryDataStorage;
 
-class InMemoryFrequencyMetricRepository extends InternalMemoryDataStorage implements FrequencyMetricRepositoryInterface
+class InternalMemoryFrequencyMetricRepository extends InternalMemoryDataStorage implements
+    FrequencyMetricRepositoryInterface
 {
     public function getDeployments(
         RepositoryName $repositoryName,

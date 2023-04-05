@@ -5,7 +5,7 @@ namespace App\Domains\DeploymentFrequency\Domain;
 use App\Domains\DeploymentFrequency\Domain\Events\DeploymentAcknowledged;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentId;
-use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTime;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentDateTime;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseId;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseName;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
@@ -15,7 +15,7 @@ final class Deployment extends AggregateRoot
 {
     public function __construct(
         private readonly DeploymentId $deploymentId,
-        private readonly DeploymentTime $deploymentTime,
+        private readonly DeploymentDateTime $deploymentTime,
         private readonly RepositoryName $repositoryName,
         private readonly Author $author,
         private readonly ReleaseId $releaseId,
@@ -24,7 +24,7 @@ final class Deployment extends AggregateRoot
     }
 
     public static function create(
-        DeploymentTime $deploymentTime,
+        DeploymentDateTime $deploymentTime,
         RepositoryName $repositoryName,
         Author $author,
         ReleaseId $releaseId,
@@ -54,7 +54,7 @@ final class Deployment extends AggregateRoot
         return $this->deploymentId;
     }
 
-    public function getDeploymentTime(): DeploymentTime
+    public function getDeploymentTime(): DeploymentDateTime
     {
         return $this->deploymentTime;
     }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Behat\Domains\DeploymentFrequency\Context;
 
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
-use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentTime;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentDateTime;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseId;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseName;
 use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
@@ -98,7 +98,7 @@ final class FrequencyByReleaseContext extends AbstractContext implements Context
 
         foreach ($rows as $index => $row) {
             $deployment = Deployment::create(
-                DeploymentTime::fromString($row['DeploymentTime']),
+                DeploymentDateTime::fromString($row['DeploymentTime']),
                 RepositoryName::toString($row['RepositoryName']),
                 Author::toString($row['Author']),
                 ReleaseId::toString($row['ReleaseId']),

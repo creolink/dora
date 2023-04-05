@@ -4,11 +4,24 @@ namespace App\Domains\DeploymentFrequency\Infrastructure\Persistence\Doctrine;
 
 use App\Domains\DeploymentFrequency\Domain\Deployment;
 use App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
-class DoctrineDeploymentRepository implements DeploymentRepositoryInterface
+class DoctrineDeploymentRepository extends ServiceEntityRepository implements DeploymentRepositoryInterface
 {
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Deployment::class);
+    }
+
     public function save(Deployment $deployment): void
     {
+        $this->getEntityManager()->persist($deployment);
+
+        $this->getEntityManager()->flush();
+
         dump('SAVED IN DB Doctrine');
+
+        //return $deployment;
     }
 }

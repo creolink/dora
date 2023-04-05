@@ -11,6 +11,11 @@ class UuidValueObject implements ValueObjectInterface
         $this->ensureUuidIsValid($uuid);
     }
 
+    public function __toString(): string
+    {
+        return $this->value();
+    }
+
     public static function init(): static
     {
         return new static(RamseyUuid::uuid4()->toString());

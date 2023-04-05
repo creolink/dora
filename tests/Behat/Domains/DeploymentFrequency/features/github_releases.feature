@@ -46,7 +46,7 @@ Feature:
     @initData
     Scenario: Calculation of metric for stored deployments
         Given There are stored Deployments with data:
-        |    DeploymentTime    | RepositoryName | Author | ReleaseId |  ReleaseName  |
+        | DeploymentTime       | RepositoryName | Author | ReleaseId | ReleaseName   |
         | 2023-02-28T15:45:23Z | microservices  | Bor    | 96939171  | Release 0.0.1 |
         | 2023-03-26T15:45:23Z | microservices  | Foo    | 96939175  | Release 0.0.2 |
         | 2023-03-27T16:45:23Z | microservices  | Bar    | 96939176  | Release 0.0.3 |
