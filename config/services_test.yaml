@@ -9,5 +9,5 @@ services:
         resource: '../tests/Behat/*'
 
     App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface:
-        class: App\Domains\DeploymentFrequency\Infrastructure\Persistence\InMemoryDeploymentRepository
+        class: App\Domains\DeploymentFrequency\Infrastructure\Persistence\InternalMemoryDeploymentRepository
 

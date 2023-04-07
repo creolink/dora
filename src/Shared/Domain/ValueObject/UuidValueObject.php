@@ -2,13 +2,15 @@
 
 namespace App\Shared\Domain\ValueObject;
 
-use Ramsey\Uuid\Uuid as RamseyUuid;
+use Symfony\Component\Uid\Uuid;
 
-class UuidValueObject implements ValueObjectInterface
+class UuidValueObject extends Uuid implements ValueObjectInterface
 {
     private function __construct(private readonly string $uuid)
     {
         $this->ensureUuidIsValid($uuid);
+
+        parent::__construct($uuid);
     }
 
     public function __toString(): string
@@ -16,9 +18,9 @@ class UuidValueObject implements ValueObjectInterface
         return $this->value();
     }
 
-    public static function init(): static
+    public static function generate(): static
     {
-        return new static(RamseyUuid::uuid4()->toString());
+        return new static(Uuid::v4()->toRfc4122());
     }
 
     public function value(): string
@@ -28,6 +30,6 @@ class UuidValueObject implements ValueObjectInterface
 
     private function ensureUuidIsValid(string $uuid): void
     {
-        RamseyUuid::isValid($uuid);
+        Uuid::isValid($uuid);
     }
 }

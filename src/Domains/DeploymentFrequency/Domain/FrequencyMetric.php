@@ -45,7 +45,7 @@ class FrequencyMetric extends AggregateRoot implements ResponseInterface
 
     public function getStartDate(): DateTimeValueObject
     {
-        return DateTimeValueObject::subDays($this->timeRange->value());
+        return DateTimeValueObject::now()->subDays($this->timeRange->value());
     }
 
     public function getEndDate(): DateTimeValueObject
@@ -55,6 +55,7 @@ class FrequencyMetric extends AggregateRoot implements ResponseInterface
 
     public function calculateScore(): Score
     {
+        dump(count($this->deployments), $this->timeRange->value(), $this->deployments);
         return Score::calculate(count($this->deployments), $this->timeRange->value());
     }
 

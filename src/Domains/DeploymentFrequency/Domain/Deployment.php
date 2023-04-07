@@ -31,7 +31,7 @@ final class Deployment extends AggregateRoot
         ReleaseName $releaseName
     ): self {
         $deployment = new self(
-            DeploymentId::init(),
+            DeploymentId::generate(),
             $deploymentTime,
             $repositoryName,
             $author,

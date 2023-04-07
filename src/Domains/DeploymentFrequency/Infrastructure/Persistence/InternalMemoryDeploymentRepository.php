@@ -12,6 +12,6 @@ class InternalMemoryDeploymentRepository extends InternalMemoryDataStorage imple
     {
         static::$memory->add($deployment);
 
-        //dump('--- SAVED IN MEMORY ---', static::$memory);
+        dump('--- SAVED IN MEMORY ---'); //, static::$memory
     }
 }

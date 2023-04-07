@@ -8,7 +8,12 @@ class StringValueObject implements ValueObjectInterface
     {
     }
 
-    public static function toString(mixed $value): static
+    public function __toString(): string
+    {
+        return $this->value();
+    }
+
+    public static function toValue(mixed $value): static
     {
         return new static((string) $value);
     }

@@ -99,10 +99,10 @@ final class FrequencyByReleaseContext extends AbstractContext implements Context
         foreach ($rows as $index => $row) {
             $deployment = Deployment::create(
                 DeploymentDateTime::fromString($row['DeploymentTime']),
-                RepositoryName::toString($row['RepositoryName']),
-                Author::toString($row['Author']),
-                ReleaseId::toString($row['ReleaseId']),
-                ReleaseName::toString($row['ReleaseName'])
+                RepositoryName::toValue($row['RepositoryName']),
+                Author::toValue($row['Author']),
+                ReleaseId::toValue($row['ReleaseId']),
+                ReleaseName::toValue($row['ReleaseName'])
             );
 
             $this->deploymentRepository->save($deployment);

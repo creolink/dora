@@ -34,3 +34,6 @@ services:
 
     App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface:
         class: App\Domains\DeploymentFrequency\Infrastructure\Persistence\Doctrine\DoctrineDeploymentRepository
+
+    App\Domains\DeploymentFrequency\Domain\FrequencyMetricRepositoryInterface:
+        class: App\Domains\DeploymentFrequency\Infrastructure\Persistence\Doctrine\DoctrineFrequencyMetricRepository

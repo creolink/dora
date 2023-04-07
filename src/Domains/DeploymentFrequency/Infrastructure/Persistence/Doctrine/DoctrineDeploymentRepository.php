@@ -4,6 +4,9 @@ namespace App\Domains\DeploymentFrequency\Infrastructure\Persistence\Doctrine;
 
 use App\Domains\DeploymentFrequency\Domain\Deployment;
 use App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\Author;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName;
+use App\Domains\DeploymentFrequency\Domain\ValueObjects\TimeRangeInDays;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -23,5 +26,10 @@ class DoctrineDeploymentRepository extends ServiceEntityRepository implements De
         dump('SAVED IN DB Doctrine');
 
         //return $deployment;
+    }
+
+    public function initData(): void
+    {
+        //static::$memory = new MemoryStorageCollection();
     }
 }
