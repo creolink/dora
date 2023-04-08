@@ -2,47 +2,44 @@
 
 namespace App\Shared\Domain\ValueObject;
 
-class DateTimeValueObject extends \DateTimeImmutable implements ValueObjectInterface
+class DateTimeValueObject implements ValueObjectInterface
 {
-    private function __construct(private readonly string $dateTime = '')
+    private function __construct(protected \DateTimeInterface $dateTime)
     {
-        parent::__construct($dateTime);
     }
 
-    public function __toString(): string
+    public static function subDays(int $days): static
     {
-        return $this->getFormattedDateTime();
-    }
-
-    public function subDays(int $days): self
-    {
-        return $this->sub(
-            new \DateInterval(sprintf('P%sD', $days))
+        return new static(
+            (new \DateTimeImmutable())
+                ->sub(
+                    new \DateInterval(sprintf('P%sD', $days))
+                )
         );
     }
 
     public static function now(): static
     {
-        return new static('now');
+        return new static(new \DateTimeImmutable('now'));
     }
 
     public static function fromString(string $dateTime): static
     {
-        return new static($dateTime);
+        return new static(new \DateTimeImmutable($dateTime));
     }
 
     public function getTimestamp(): int
     {
-        return parent::getTimestamp();
+        return $this->dateTime->getTimestamp();
     }
 
     public function getFormattedDateTime(): string
     {
-        return parent::format('d/m/Y H:i:s');
+        return $this->dateTime->format('d/m/Y H:i:s');
     }
 
     public function getFormattedDate(): string
     {
-        return parent::format('d/m/Y');
+        return $this->dateTime->format('d/m/Y');
     }
 }

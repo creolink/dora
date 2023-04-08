@@ -28,10 +28,10 @@ class RecordDeploymentCommandHandler implements CommandHandlerInterface, EventSu
     {
         $this->metricSaver->__invoke(
             DeploymentDateTime::fromString($command->getDeploymentTime()),
-            RepositoryName::toValue($command->getRepositoryName()),
-            Author::toValue($command->getAuthor()),
-            ReleaseId::toValue($command->getReleaseId()),
-            ReleaseName::toValue($command->getReleaseName())
+            RepositoryName::stringify($command->getRepositoryName()),
+            Author::stringify($command->getAuthor()),
+            ReleaseId::stringify($command->getReleaseId()),
+            ReleaseName::stringify($command->getReleaseName())
         );
     }
 }

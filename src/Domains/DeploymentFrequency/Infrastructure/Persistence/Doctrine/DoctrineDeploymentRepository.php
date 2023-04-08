@@ -19,13 +19,29 @@ class DoctrineDeploymentRepository extends ServiceEntityRepository implements De
 
     public function save(Deployment $deployment): void
     {
+        dump($deployment);
+
         $this->getEntityManager()->persist($deployment);
 
         $this->getEntityManager()->flush();
 
-        dump('SAVED IN DB Doctrine');
+        dump('SAVED IN DB Doctrine'); //, $deployment
+    }
 
-        //return $deployment;
+    public function findByRepositoryAndTime(
+        RepositoryName $repositoryName,
+        TimeRangeInDays $timeRange,
+        ?Author $author
+    ): ?array {
+        $startDateTime = (new \DateTimeImmutable())
+            ->sub(
+                new \DateInterval(sprintf('P%sD', $timeRange->value()))
+            )
+        ;
+
+        return $this->findBy([
+            "repositoryName.value" => $repositoryName->value()
+        ]);
     }
 
     public function initData(): void

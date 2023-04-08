@@ -45,7 +45,8 @@ class FrequencyMetric extends AggregateRoot implements ResponseInterface
 
     public function getStartDate(): DateTimeValueObject
     {
-        return DateTimeValueObject::now()->subDays($this->timeRange->value());
+       // return DateTimeValueObject::now()->subDays($this->timeRange->value());
+        return DateTimeValueObject::subDays($this->timeRange->value());
     }
 
     public function getEndDate(): DateTimeValueObject

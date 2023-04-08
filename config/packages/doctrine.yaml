@@ -6,6 +6,8 @@ doctrine:
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '15'
 
+        types:
+            DeploymentId:  App\Domains\DeploymentFrequency\Infrastructure\Persistence\Doctrine\Type\DeploymentIdType
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
@@ -13,11 +15,15 @@ doctrine:
         auto_mapping: true
         mappings:
             DeploymentFrequency:
-#                is_bundle: false
                 type: yml
                 dir: '%kernel.project_dir%/src/Domains/DeploymentFrequency/Infrastructure/Persistence/Doctrine/Entity'
                 prefix: 'App\Domains\DeploymentFrequency\Domain'
                 alias: Deployment
+            DeploymentFrequencyEmbeddable:
+                type: yml
+                dir: '%kernel.project_dir%/src/Domains/DeploymentFrequency/Infrastructure/Persistence/Doctrine/Embeddable'
+                prefix: 'App\Domains\DeploymentFrequency\Domain\ValueObjects'
+                alias: DeploymentEmbeddable
 
 when@test:
     doctrine:

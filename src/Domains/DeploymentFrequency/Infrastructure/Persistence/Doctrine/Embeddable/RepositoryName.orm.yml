@@ -1,0 +1,5 @@
+App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName:
+  type: embeddable
+  fields:
+    value: { column: repository_name, type: string, length: 255 }
+

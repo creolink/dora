@@ -1,0 +1,50 @@
+App\Domains\DeploymentFrequency\Domain\Deployment:
+  type: entity
+  repositoryClass: App\Domains\DeploymentFrequency\Infrastructure\Persistence\Doctrine\DoctrineDeploymentRepository
+  table: deployments
+  indexes:
+    repository_name_index:
+      columns: [ repository_name ]
+  id:
+    deploymentId:
+      column: id
+      type: DeploymentId
+      unique: true
+  embedded:
+    deploymentTime:
+      class: App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentDateTime
+      columnPrefix: false
+    repositoryName:
+      class: App\Domains\DeploymentFrequency\Domain\ValueObjects\RepositoryName
+      columnPrefix: false
+    releaseId:
+      class: App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseId
+      columnPrefix: false
+    author:
+      class: App\Domains\DeploymentFrequency\Domain\ValueObjects\Author
+      columnPrefix: false
+    releaseName:
+      class: App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseName
+      columnPrefix: false
+  fields:
+#    deploymentTime:
+#      column: deployment_time
+#      type: datetime
+#      nullable: true
+#    repositoryName:
+#      column: repository_name
+#      type: string
+#      length: 255
+#    releaseId:
+#      column: release_id
+#      type: string
+#      length: 255
+#    author:
+#      column: author
+#      type: string
+#      length: 255
+#    releaseName:
+#      column: release_name
+#      type: string
+#      length: 255
+

@@ -4,7 +4,7 @@ namespace App\Shared\Domain\ValueObject;
 
 class StringValueObject implements ValueObjectInterface
 {
-    private function __construct(private readonly string $value)
+    private function __construct(protected string $value)
     {
     }
 
@@ -13,7 +13,7 @@ class StringValueObject implements ValueObjectInterface
         return $this->value();
     }
 
-    public static function toValue(mixed $value): static
+    public static function stringify(mixed $value): static
     {
         return new static((string) $value);
     }

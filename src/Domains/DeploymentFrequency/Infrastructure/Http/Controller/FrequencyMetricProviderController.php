@@ -20,7 +20,7 @@ class FrequencyMetricProviderController extends AbstractController
     #[Route('/metric/{repositoryName}', name: 'frequency_metric', methods: 'GET')]
     public function provideFrequencyMetric(Request $request): JsonResponse
     {
-        $repositoryName = RepositoryName::toValue($request->get('repositoryName'));
+        $repositoryName = RepositoryName::stringify($request->get('repositoryName'));
         $timeRangeInDays = TimeRangeInDays::toInt($request->get('timeRangeDays'));
 
         $metric = $this->frequencyMetric->__invoke(

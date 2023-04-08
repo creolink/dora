@@ -1,0 +1,5 @@
+App\Domains\DeploymentFrequency\Domain\ValueObjects\Author:
+  type: embeddable
+  fields:
+    value: { column: author, type: string, length: 255 }
+

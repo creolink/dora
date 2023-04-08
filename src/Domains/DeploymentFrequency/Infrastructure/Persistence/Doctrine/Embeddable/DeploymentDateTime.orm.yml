@@ -1,0 +1,4 @@
+App\Domains\DeploymentFrequency\Domain\ValueObjects\DeploymentDateTime:
+  type: embeddable
+  fields:
+    dateTime: { column: deployment_time, type: datetime, nullable: true }

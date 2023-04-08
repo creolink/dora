@@ -2,6 +2,7 @@
 
 namespace App\Domains\DeploymentFrequency\Application;
 
+use App\Domains\DeploymentFrequency\Domain\DeploymentRepositoryInterface;
 use App\Domains\DeploymentFrequency\Domain\FrequencyMetric;
 use App\Domains\DeploymentFrequency\Domain\FrequencyMetricRepositoryInterface;
 use App\Shared\Domain\Bus\Query\QueryHandlerInterface;
@@ -9,13 +10,13 @@ use App\Shared\Domain\Bus\Query\QueryHandlerInterface;
 class FrequencyMetricQueryHandler implements QueryHandlerInterface
 {
     public function __construct(
-        private readonly FrequencyMetricRepositoryInterface $metricRepository
+        private readonly DeploymentRepositoryInterface $deploymentRepository
     ) {
     }
 
     public function __invoke(FrequencyMetricQuery $query): FrequencyMetric
     {
-        $deployments = $this->metricRepository->getDeployments(
+        $deployments = $this->deploymentRepository->findByRepositoryAndTime(
             $query->getRepositoryName(),
             $query->getTimeRangeInDays(),
             $query->getAuthor()

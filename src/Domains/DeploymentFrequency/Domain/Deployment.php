@@ -13,7 +13,7 @@ use App\Shared\Domain\AggregateRoot;
 
 final class Deployment extends AggregateRoot
 {
-    public function __construct(
+    private function __construct(
         private readonly DeploymentId $deploymentId,
         private readonly DeploymentDateTime $deploymentTime,
         private readonly RepositoryName $repositoryName,

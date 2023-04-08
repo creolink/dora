@@ -16,25 +16,25 @@ class DoctrineFrequencyMetricRepository extends ServiceEntityRepository implemen
     {
         parent::__construct($registry, FrequencyMetric::class);
     }
-
-    public function getDeployments(
-        RepositoryName $repositoryName,
-        TimeRangeInDays $timeRange,
-        ?Author $author
-    ): ?array {
-        $startDateTime = (new \DateTimeImmutable())
-            ->sub(
-                new \DateInterval(sprintf('P%sD', $timeRange->value()))
-            )
-        ;
-
-        return $this->findBy([
-            'repositoryName' => $repositoryName->value()
-        ]);
-    }
-
-    public function initData(): void
-    {
-        //static::$memory = new MemoryStorageCollection();
-    }
+//
+//    public function getDeployments(
+//        RepositoryName $repositoryName,
+//        TimeRangeInDays $timeRange,
+//        ?Author $author
+//    ): ?array {
+//        $startDateTime = (new \DateTimeImmutable())
+//            ->sub(
+//                new \DateInterval(sprintf('P%sD', $timeRange->value()))
+//            )
+//        ;
+//
+//        return $this->findBy([
+//            'repositoryName' => $repositoryName->value()
+//        ]);
+//    }
+//
+//    public function initData(): void
+//    {
+//        //static::$memory = new MemoryStorageCollection();
+//    }
 }

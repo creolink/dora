@@ -4,13 +4,11 @@ namespace App\Shared\Domain\ValueObject;
 
 use Symfony\Component\Uid\Uuid;
 
-class UuidValueObject extends Uuid implements ValueObjectInterface
+class UuidValueObject implements ValueObjectInterface
 {
-    private function __construct(private readonly string $uuid)
+    public function __construct(private readonly string $uuid)
     {
         $this->ensureUuidIsValid($uuid);
-
-        parent::__construct($uuid);
     }
 
     public function __toString(): string

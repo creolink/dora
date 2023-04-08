@@ -1,0 +1,5 @@
+App\Domains\DeploymentFrequency\Domain\ValueObjects\ReleaseName:
+  type: embeddable
+  fields:
+    value: { column: release_name, type: string, length: 255 }
+

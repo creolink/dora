@@ -4,7 +4,7 @@ namespace App\Shared\Domain\ValueObject;
 
 class IntValueObject implements ValueObjectInterface
 {
-    private function __construct(private readonly int $value)
+    private function __construct(protected readonly int $value)
     {
     }
 
