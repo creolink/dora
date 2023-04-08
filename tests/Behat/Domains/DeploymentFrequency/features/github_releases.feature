@@ -1,10 +1,11 @@
 
 Feature:
-    It tests the deploment frequency metric collected from github releases
+    It tests the deployment frequency metric collected from github releases
 
-    @initData
+    @initData @withFrozenTime
     Scenario: End-to-End test from collection up to metric calculation
-        Given the "Content-Type" request header contains "application/json"
+        Given The time is frozen at "2023-04-01"
+        And the "Content-Type" request header contains "application/json"
         And the request body is:
         """
         {
@@ -45,7 +46,8 @@ Feature:
 
     @initData
     Scenario: Calculation of metric for stored deployments
-        Given There are stored Deployments with data:
+        Given The time is frozen at "2023-04-01"
+        And There are stored Deployments with data:
         | DeploymentTime       | RepositoryName | Author | ReleaseId | ReleaseName   |
         | 2023-02-28T15:45:23Z | microservices  | Bor    | 96939171  | Release 0.0.1 |
         | 2023-03-26T15:45:23Z | microservices  | Foo    | 96939175  | Release 0.0.2 |
